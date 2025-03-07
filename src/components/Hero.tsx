@@ -1,110 +1,74 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { ArrowDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [typedText, setTypedText] = useState("");
   const fullName = "Yejju Sathya Sai";
   const [typeIndex, setTypeIndex] = useState(0);
-  const [glowIntensity, setGlowIntensity] = useState(0);
   
-  // Typing animation effect - optimized for performance
-  useEffect(() => {
+  // Optimized typing animation with useCallback
+  const typeText = useCallback(() => {
     if (typeIndex < fullName.length) {
-      const timeout = setTimeout(() => {
+      requestAnimationFrame(() => {
         setTypedText(prev => prev + fullName.charAt(typeIndex));
         setTypeIndex(prev => prev + 1);
-      }, 150);
-      
-      return () => clearTimeout(timeout);
+      });
     } else {
-      // Restart typing after a delay
-      const restartTimeout = setTimeout(() => {
+      // Reset typing after delay
+      setTimeout(() => {
         setTypedText("");
         setTypeIndex(0);
       }, 5000);
-      
-      return () => clearTimeout(restartTimeout);
     }
-  }, [typeIndex]);
-  
-  // Optimized pulsating border glow effect with RAF for better performance
+  }, [typeIndex, fullName]);
+
   useEffect(() => {
-    let animationFrameId: number;
-    let direction = 1;
-    let intensity = 0;
-    
-    const animate = () => {
-      intensity += direction * 0.5;
-      
-      if (intensity >= 100) {
-        intensity = 100;
-        direction = -1;
-      } else if (intensity <= 0) {
-        intensity = 0;
-        direction = 1;
-      }
-      
-      setGlowIntensity(intensity);
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    
-    animationFrameId = requestAnimationFrame(animate);
-    
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-  
-  // Optimized intersection observer for fade-in animations
+    const typingDelay = setTimeout(typeText, 150);
+    return () => clearTimeout(typingDelay);
+  }, [typeIndex, typeText]);
+
+  // Optimized intersection observer for animations
   useEffect(() => {
+    if (!heroRef.current) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const elements = entry.target.querySelectorAll('.animate-on-scroll');
-            
-            elements.forEach((element, index) => {
+            entry.target.querySelectorAll('.animate-on-scroll').forEach((element, index) => {
               requestAnimationFrame(() => {
-                setTimeout(() => {
-                  element.classList.add('animate-fade-in');
-                }, index * 100); // Reduced delay for faster animations
+                element.classList.add('animate-fade-in');
               });
             });
           }
         });
       },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px"
-      }
+      { threshold: 0.1 }
     );
     
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
-    }
-    
-    return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
-      }
-    };
+    observer.observe(heroRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section 
+    <motion.section 
       id="home" 
       ref={heroRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       className="relative min-h-screen flex items-center justify-center overflow-hidden will-change-transform"
     >
-      {/* Background Video with better overlay - hardware accelerated */}
+      {/* Hardware-accelerated video background */}
       <video 
         autoPlay 
         muted 
         loop 
         playsInline
-        className="video-background"
+        className="fixed top-0 left-0 w-full h-full object-cover z-[-1] transform-gpu"
       >
         <source 
           src="https://github.com/user-attachments/assets/e270eaa6-584b-4976-94b5-9eb15651b7bc" 
@@ -112,57 +76,78 @@ const Hero: React.FC = () => {
         />
       </video>
       
-      {/* Optimized overlay with subtle blur for better performance */}
-      <div className="video-overlay bg-black/60 backdrop-blur-[2px]"></div>
+      {/* Optimized overlay */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-[-1]" />
       
-      {/* Reduced number of decorative elements for better performance */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-10 will-change-transform"></div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
-        <div className="glass-card p-8 md:p-10 rounded-2xl transition-transform duration-500 hover:shadow-[0_0_30px_rgba(88,85,251,0.3)]">
-          <h2 className="text-lg sm:text-xl md:text-2xl text-primary opacity-0 animate-on-scroll mb-4">
-            Hello, I'm
-          </h2>
-          
-          {/* Futuristic glowing border with optimized animations */}
-          <div 
-            className="relative rounded-xl p-1 inline-block will-change-transform"
-            style={{
-              background: `linear-gradient(90deg, rgba(88,85,251,${0.2 + (glowIntensity / 200)}), rgba(163,91,255,${0.2 + (glowIntensity / 200)}))`,
-              boxShadow: `0 0 ${10 + (glowIntensity / 10)}px rgba(88,85,251,${0.3 + (glowIntensity / 300)})`,
-              transition: 'box-shadow 0.5s ease-out'
-            }}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <motion.div 
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="glass-card p-8 md:p-10 rounded-2xl transform-gpu"
+        >
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-primary via-accent to-blue-400 bg-clip-text text-transparent font-medium mb-4"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold p-4 tracking-tight opacity-0 animate-on-scroll text-white bg-black rounded-lg">
+            Hello, I'm
+          </motion.h2>
+          
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="relative rounded-xl p-1 inline-block bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold p-4 tracking-tight bg-gradient-to-r from-primary via-accent to-blue-400 bg-clip-text text-transparent">
               {typedText}<span className="animate-pulse">|</span>
             </h1>
-          </div>
+          </motion.div>
           
-          <div className="h-px w-40 mx-auto my-8 opacity-0 animate-on-scroll bg-gradient-to-r from-primary via-accent to-primary/50"></div>
-          <h3 className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-2xl mx-auto opacity-0 animate-on-scroll mb-4">
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="h-px w-40 mx-auto my-8 bg-gradient-to-r from-primary via-accent to-primary/50"
+          />
+
+          <motion.h3 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent font-medium max-w-2xl mx-auto mb-4"
+          >
             Student at Government Institute of Electronics
-          </h3>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto opacity-0 animate-on-scroll mb-12">
+          </motion.h3>
+
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
+          >
             Specializing in Artificial Intelligence and Machine Learning
-          </p>
+          </motion.p>
           
-          <a
+          <motion.a
             href="#about"
-            className="inline-block opacity-0 animate-on-scroll"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block transform-gpu"
             aria-label="Scroll to About section"
           >
-            <div className="glass border border-primary/20 p-3 rounded-full hover:border-primary transition-colors duration-300 hover:scale-110 animate-float hover:shadow-glow">
+            <div className="glass p-3 rounded-full border border-primary/20 hover:border-primary transition-colors duration-300 hover:shadow-glow">
               <ArrowDown className="w-6 h-6 text-primary" />
             </div>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
-      
-      {/* Gradient fade to next section - seamless transition with reduced opacity */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
-    </section>
+    </motion.section>
   );
 };
 
