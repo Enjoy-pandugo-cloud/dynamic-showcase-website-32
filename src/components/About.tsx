@@ -81,9 +81,9 @@ const About: React.FC = () => {
           <div className="glass-card p-8 rounded-2xl">
             <p className="text-lg text-gray-300 mb-6 leading-relaxed fade-up hidden transition-all duration-[1500ms] transform translate-y-8">
              I'm a passionate student specializing in 
-            <span className="text-blue-400">Artificial Intelligence and Machine Learning</span> 
+            <span className="text-blue-400"> Artificial Intelligence and Machine Learning </span> 
             at the 
-            <span className="text-blue-400">Government Institute of Electronics, East Maredapally, Secunderabad</span>. 
+            <span className="text-blue-400"> Government Institute of Electronics, East Maredapally, Secunderabad</span>. 
             I'm devoted to creating innovative solutions through clean, efficient code and cutting-edge technologies.
           </p>
 
@@ -91,7 +91,7 @@ const About: React.FC = () => {
             My journey in tech is driven by continuous learning and problem-solving. 
             I enjoy tackling complex challenges and finding elegant solutions that enhance user experiences 
             while maintaining 
-            <span className="text-blue-400">code quality</span> and <span className="text-blue-400">performance</span>.
+            <span className="text-blue-400"> code quality</span> and <span className="text-blue-400">performance</span>.
           </p>
 
             {/* Skills Section */}
