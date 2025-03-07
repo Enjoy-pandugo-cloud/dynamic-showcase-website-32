@@ -68,10 +68,9 @@ const About: React.FC = () => {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden glass-card hover:shadow-glow transition-all duration-300">
                 <img 
-                  src="https://github.com/user-attachments/assets/4b3aec50-e518-4ed8-895c-0fc3ea5c3083" 
+                  src="https://res.cloudinary.com/dlkksfa9e/image/upload/v1741387661/yfhka4arlfhpkzatfb2p.jpg" 
                   alt="Yejju Sathya Sai" 
                   className="w-full h-full object-cover"
-                  loading="lazy"
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-accent rounded-lg"></div>
