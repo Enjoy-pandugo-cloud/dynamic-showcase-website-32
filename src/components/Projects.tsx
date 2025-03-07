@@ -30,8 +30,15 @@ const Projects: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            entry.target.classList.remove('hidden');
+            const fadeElements = entry.target.querySelectorAll('.fade-up');
+            fadeElements.forEach((el, index) => {
+              setTimeout(() => {
+                el.classList.add('visible');
+                el.classList.remove('hidden');
+                el.classList.add('opacity-100');
+                el.classList.remove('opacity-0');
+              }, index * 100);
+            });
           }
         });
       },
@@ -41,20 +48,23 @@ const Projects: React.FC = () => {
       }
     );
     
-    const fadeElements = sectionRef.current?.querySelectorAll('.fade-up');
-    fadeElements?.forEach((el) => observer.observe(el));
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
     
     return () => {
-      fadeElements?.forEach((el) => observer.unobserve(el));
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
     };
   }, []);
 
   return (
     <section id="projects" ref={sectionRef} className="py-24 bg-gradient-to-b from-secondary/10 to-background">
-      <div className="section-container">
-        <div className="mb-16 fade-up hidden">
-          <h2 className="section-title">Projects</h2>
-          <p className="text-gray-400 mt-4 max-w-2xl">
+      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
+          <h2 className="text-3xl font-bold tracking-tight text-center">Projects</h2>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-center">
             A collection of my recent work, automatically updated from my GitHub repositories.
           </p>
         </div>
@@ -69,7 +79,7 @@ const Projects: React.FC = () => {
             ))}
           </div>
         ) : repos.length === 0 ? (
-          <div className="text-center py-20 fade-up hidden">
+          <div className="text-center py-20 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
             <p className="text-gray-400">No repositories found. Check back later!</p>
           </div>
         ) : (
@@ -77,7 +87,7 @@ const Projects: React.FC = () => {
             {repos.map((repo, index) => (
               <div 
                 key={repo.id}
-                className="bg-secondary/50 rounded-lg overflow-hidden glass border border-white/5 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 fade-up hidden"
+                className="bg-secondary/50 rounded-lg overflow-hidden glass border border-white/5 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 fade-up opacity-0 transition-all duration-500 transform translate-y-8"
                 style={{ transitionDelay: `${index * 50}ms` }}
               >
                 <div className="p-6">
@@ -138,7 +148,7 @@ const Projects: React.FC = () => {
           </div>
         )}
         
-        <div className="text-center mt-12 fade-up hidden">
+        <div className="text-center mt-12 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
           <a 
             href="https://github.com/ysathyasai" 
             target="_blank" 

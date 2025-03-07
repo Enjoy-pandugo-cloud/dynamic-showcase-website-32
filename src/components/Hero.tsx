@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
           Hello, I'm
         </h2>
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight opacity-0 animate-on-scroll">
-          Yakkala Sathya Sai
+          Yejju Sathya Sai
         </h1>
         <div className="h-px w-24 bg-primary mx-auto my-8 opacity-0 animate-on-scroll"></div>
         <h3 className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-2xl mx-auto opacity-0 animate-on-scroll mb-12">

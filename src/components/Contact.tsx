@@ -10,8 +10,15 @@ const Contact: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            entry.target.classList.remove('hidden');
+            const fadeElements = entry.target.querySelectorAll('.fade-up');
+            fadeElements.forEach((el, index) => {
+              setTimeout(() => {
+                el.classList.add('visible');
+                el.classList.remove('hidden');
+                el.classList.add('opacity-100');
+                el.classList.remove('opacity-0');
+              }, index * 100);
+            });
           }
         });
       },
@@ -21,22 +28,25 @@ const Contact: React.FC = () => {
       }
     );
     
-    const fadeElements = sectionRef.current?.querySelectorAll('.fade-up');
-    fadeElements?.forEach((el) => observer.observe(el));
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
     
     return () => {
-      fadeElements?.forEach((el) => observer.unobserve(el));
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
     };
   }, []);
 
   return (
     <section id="contact" ref={sectionRef} className="py-24">
-      <div className="section-container">
-        <div className="mb-16 fade-up hidden">
-          <h2 className="section-title">Get In Touch</h2>
+      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
+          <h2 className="text-3xl font-bold tracking-tight text-center">Get In Touch</h2>
         </div>
         
-        <div className="max-w-3xl mx-auto glass rounded-2xl p-8 border border-white/5 fade-up hidden">
+        <div className="max-w-3xl mx-auto glass rounded-2xl p-8 border border-white/5 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
           <p className="text-lg text-center text-gray-300 mb-8">
             Have a project in mind or want to collaborate? Feel free to reach out through any of the platforms below.
           </p>
