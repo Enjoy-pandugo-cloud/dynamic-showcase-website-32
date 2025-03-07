@@ -8,7 +8,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-// Page transition variants
+// Performance optimized page transition variants
 const pageVariants = {
   initial: {
     opacity: 0,
@@ -16,21 +16,22 @@ const pageVariants = {
   animate: {
     opacity: 1,
     transition: {
-      duration: 0.5,
-      staggerChildren: 0.2,
+      duration: 0.3,
+      staggerChildren: 0.1,
+      when: "beforeChildren",
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
     },
   },
 };
 
 const Index: React.FC = () => {
+  // Optimized scroll behavior
   useEffect(() => {
-    // Smooth scroll behavior
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -47,13 +48,13 @@ const Index: React.FC = () => {
       }
     };
     
-    document.addEventListener('click', handleAnchorClick);
+    document.addEventListener('click', handleAnchorClick, { passive: false });
     return () => document.removeEventListener('click', handleAnchorClick);
   }, []);
 
   return (
     <motion.div 
-      className="min-h-screen bg-background text-foreground overflow-x-hidden"
+      className="min-h-screen bg-background text-foreground overflow-hidden"
       initial="initial"
       animate="animate"
       exit="exit"

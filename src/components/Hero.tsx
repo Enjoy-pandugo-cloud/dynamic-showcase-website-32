@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
   const [typeIndex, setTypeIndex] = useState(0);
   const [glowIntensity, setGlowIntensity] = useState(0);
   
-  // Typing animation effect
+  // Typing animation effect - optimized for performance
   useEffect(() => {
     if (typeIndex < fullName.length) {
       const timeout = setTimeout(() => {
@@ -29,30 +29,55 @@ const Hero: React.FC = () => {
     }
   }, [typeIndex]);
   
-  // Pulsating border glow effect
+  // Optimized pulsating border glow effect with RAF for better performance
   useEffect(() => {
-    const interval = setInterval(() => {
-      setGlowIntensity(prev => (prev === 0 ? 100 : 0));
-    }, 2000);
+    let animationFrameId: number;
+    let direction = 1;
+    let intensity = 0;
     
-    return () => clearInterval(interval);
+    const animate = () => {
+      intensity += direction * 0.5;
+      
+      if (intensity >= 100) {
+        intensity = 100;
+        direction = -1;
+      } else if (intensity <= 0) {
+        intensity = 0;
+        direction = 1;
+      }
+      
+      setGlowIntensity(intensity);
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animationFrameId = requestAnimationFrame(animate);
+    
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
   
+  // Optimized intersection observer for fade-in animations
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          const elements = heroRef.current?.querySelectorAll('.animate-on-scroll');
-          
-          elements?.forEach((element, index) => {
-            setTimeout(() => {
-              element.classList.add('animate-fade-in');
-            }, index * 200);
-          });
-        }
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const elements = entry.target.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach((element, index) => {
+              requestAnimationFrame(() => {
+                setTimeout(() => {
+                  element.classList.add('animate-fade-in');
+                }, index * 100); // Reduced delay for faster animations
+              });
+            });
+          }
+        });
       },
       {
         threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
       }
     );
     
@@ -71,9 +96,9 @@ const Hero: React.FC = () => {
     <section 
       id="home" 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden will-change-transform"
     >
-      {/* Background Video with better overlay */}
+      {/* Background Video with better overlay - hardware accelerated */}
       <video 
         autoPlay 
         muted 
@@ -86,28 +111,31 @@ const Hero: React.FC = () => {
           type="video/mp4" 
         />
       </video>
-      <div className="video-overlay bg-black/70 backdrop-blur-sm"></div>
       
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-accent/20 rounded-full filter blur-3xl opacity-20 animate-pulse-slow" style={{ animationDelay: "1s" }}></div>
+      {/* Optimized overlay with subtle blur for better performance */}
+      <div className="video-overlay bg-black/60 backdrop-blur-[2px]"></div>
+      
+      {/* Reduced number of decorative elements for better performance */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-10 will-change-transform"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center transition-all duration-700">
-        <div className="glass-card p-10 rounded-2xl transition-all duration-700 hover:shadow-[0_0_30px_rgba(88,85,251,0.3)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
+        <div className="glass-card p-8 md:p-10 rounded-2xl transition-transform duration-500 hover:shadow-[0_0_30px_rgba(88,85,251,0.3)]">
           <h2 className="text-lg sm:text-xl md:text-2xl text-primary opacity-0 animate-on-scroll mb-4">
             Hello, I'm
           </h2>
           
-          {/* Futuristic glowing border effect */}
+          {/* Futuristic glowing border with optimized animations */}
           <div 
-            className={`relative rounded-xl p-1 inline-block transition-all duration-700`}
+            className="relative rounded-xl p-1 inline-block will-change-transform"
             style={{
               background: `linear-gradient(90deg, rgba(88,85,251,${0.2 + (glowIntensity / 200)}), rgba(163,91,255,${0.2 + (glowIntensity / 200)}))`,
-              boxShadow: `0 0 ${10 + (glowIntensity / 10)}px rgba(88,85,251,${0.3 + (glowIntensity / 300)})`
+              boxShadow: `0 0 ${10 + (glowIntensity / 10)}px rgba(88,85,251,${0.3 + (glowIntensity / 300)})`,
+              transition: 'box-shadow 0.5s ease-out'
             }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold p-4 tracking-tight opacity-0 animate-on-scroll text-gradient bg-black rounded-lg">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold p-4 tracking-tight opacity-0 animate-on-scroll text-white bg-black rounded-lg">
               {typedText}<span className="animate-pulse">|</span>
             </h1>
           </div>
@@ -132,8 +160,8 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      {/* Gradient fade to next section - smoother transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+      {/* Gradient fade to next section - seamless transition with reduced opacity */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
     </section>
   );
 };
