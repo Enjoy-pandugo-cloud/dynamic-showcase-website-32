@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
   
   return (
     <footer className="py-12 relative overflow-hidden">
-      {/* Gradient background */}
+      {/* Gradient background with improved transitions */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background to-background/40"></div>
         <div className="absolute -top-40 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl"></div>
@@ -37,9 +37,9 @@ const Footer: React.FC = () => {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* About column */}
-          <div className="col-span-1 md:col-span-1">
+          <div className="col-span-1">
             <h3 className="text-xl font-semibold mb-4 text-gradient-primary">Yejju Sathya Sai</h3>
             <p className="text-gray-400 text-sm mb-4">
               AI & ML Student creating innovative solutions through clean, efficient code and cutting-edge technologies.
@@ -49,89 +49,72 @@ const Footer: React.FC = () => {
                 href="https://github.com/ysathyasai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
                 aria-label="GitHub"
               >
-                <Github size={18} />
+                <Github size={18} className="hover:shadow-glow" />
               </a>
               <a 
                 href="https://www.linkedin.com/in/ysathyasai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={18} />
+                <Linkedin size={18} className="hover:shadow-glow" />
               </a>
               <a 
                 href="https://x.com/ysathyasai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
                 aria-label="Twitter"
               >
-                <Twitter size={18} />
+                <Twitter size={18} className="hover:shadow-glow" />
               </a>
               <a 
                 href="https://medium.com/@ysathyasai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
                 aria-label="Medium"
               >
-                <FileText size={18} />
+                <FileText size={18} className="hover:shadow-glow" />
               </a>
               <a 
                 href="https://openprofile.dev/ysathyasai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
                 aria-label="OpenProfile"
               >
-                <ExternalLink size={18} />
+                <ExternalLink size={18} className="hover:shadow-glow" />
               </a>
             </div>
           </div>
           
-          {/* Quick links */}
+          {/* Quick links - kept simple and essential */}
           <div className="col-span-1">
             <h3 className="text-md font-semibold mb-4 uppercase text-gray-300">Navigation</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#home" className="text-gray-400 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block">
+                <a href="#home" className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-gray-400 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block">
+                <a href="#about" className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block">
                   About
                 </a>
               </li>
               <li>
-                <a href="#projects" className="text-gray-400 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block">
+                <a href="#projects" className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block">
                   Projects
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-400 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block">
+                <a href="#contact" className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block">
                   Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Legal links */}
-          <div className="col-span-1">
-            <h3 className="text-md font-semibold mb-4 uppercase text-gray-300">Legal</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#privacy" className="text-gray-400 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#terms" className="text-gray-400 hover:text-white transition-colors text-sm hover:translate-x-1 inline-block">
-                  Terms of Service
                 </a>
               </li>
             </ul>
@@ -147,7 +130,7 @@ const Footer: React.FC = () => {
             </p>
             <a 
               href="mailto:ysathyasai.dev@gmail.com" 
-              className="text-gray-400 hover:text-primary transition-colors text-sm"
+              className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm"
             >
               ysathyasai.dev@gmail.com
             </a>
@@ -169,15 +152,15 @@ const Footer: React.FC = () => {
         </div>
       </div>
       
-      {/* Back to top button */}
+      {/* Enhanced Back to top button with smoother animation */}
       <button
         onClick={scrollToTop}
-        className={`fixed right-6 bottom-6 p-3 rounded-full glass border border-primary/20 hover:border-primary shadow-lg transition-all duration-300 hover:shadow-glow z-50 group ${
+        className={`fixed right-6 bottom-6 p-3 rounded-full glass border border-primary/20 hover:border-primary shadow-lg transition-all duration-500 hover:shadow-[0_0_20px_rgba(88,85,251,0.4)] z-50 group ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         }`}
         aria-label="Back to top"
       >
-        <ArrowUp className="w-5 h-5 text-primary group-hover:animate-bounce" />
+        <ArrowUp className="w-5 h-5 text-primary group-hover:animate-bounce-subtle" />
       </button>
     </footer>
   );

@@ -9,6 +9,16 @@ const Contact: React.FC = () => {
   const [formErrors, setFormErrors] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
+  const [isPulsing, setIsPulsing] = useState(false);
+  
+  // Animation for pulsing contact button
+  useEffect(() => {
+    const pulseInterval = setInterval(() => {
+      setIsPulsing(prev => !prev);
+    }, 2000);
+    
+    return () => clearInterval(pulseInterval);
+  }, []);
   
   // Animation for opening envelope when user scrolls to contact section
   useEffect(() => {
@@ -89,12 +99,22 @@ const Contact: React.FC = () => {
     if (validateForm()) {
       setIsSubmitting(true);
       
-      // Simulating form submission
+      // Create mailto link with form data
+      const subject = `Message from ${formData.name}`;
+      const body = `${formData.message}\n\nFrom: ${formData.name} (${formData.email})`;
+      const mailtoLink = `mailto:ysathyasai.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Show success toast
+      toast.success("Opening your email client to send the message!");
+      
+      // Reset form after short delay
       setTimeout(() => {
-        toast.success("Message sent successfully! I'll get back to you soon.");
         setFormData({ name: '', email: '', message: '' });
         setIsSubmitting(false);
-      }, 1500);
+      }, 1000);
     }
   };
 
@@ -116,7 +136,7 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 relative">
+    <section id="contact" ref={sectionRef} className="py-24 relative transition-all duration-500">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-40 left-40 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl"></div>
         <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-accent/10 rounded-full filter blur-3xl"></div>
@@ -187,7 +207,9 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-4 btn-gradient rounded-lg flex items-center justify-center space-x-2 transform transition hover:scale-[1.02] active:scale-[0.98]"
+                className={`w-full py-3 px-4 btn-gradient rounded-lg flex items-center justify-center space-x-2 transform transition ${
+                  isPulsing ? 'scale-[1.03] shadow-[0_0_25px_rgba(88,85,251,0.4)]' : 'scale-[1.00]'
+                } hover:scale-[1.02] active:scale-[0.98]`}
               >
                 {isSubmitting ? (
                   <span className="flex items-center">

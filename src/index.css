@@ -45,11 +45,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-padding-top: 80px;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    overflow-x: hidden;
   }
   
   /* Improve focus styles for accessibility */
@@ -79,6 +81,17 @@
   input, textarea {
     @apply bg-background/50 border border-white/10 focus:border-primary/50 focus:outline-none transition-all duration-300;
   }
+  
+  /* Smooth section transitions */
+  section {
+    @apply transition-all duration-700 ease-in-out;
+    position: relative;
+  }
+  
+  section::after {
+    content: "";
+    @apply absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none;
+  }
 }
 
 @layer components {
@@ -87,7 +100,7 @@
   }
   
   .glass-card {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)];
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] transition-all duration-300;
   }
   
   .gradient-border {
@@ -200,11 +213,6 @@
   .micro-glow {
     @apply transition-all hover:text-primary hover:glow-text;
   }
-  
-  /* Legal links fade */
-  .legal-link {
-    @apply text-gray-500 hover:text-gray-300 transition-colors duration-300;
-  }
 }
 
 /* Visible class for intersection observer animations */
@@ -279,4 +287,29 @@ section {
 
 .animate-bounce-subtle {
   animation: bounce-subtle 2s infinite;
+}
+
+/* Typing cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Additional smooth transitions */
+.page-transition {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+/* Dynamic border glow animation */
+@keyframes border-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(88, 85, 251, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(88, 85, 251, 0.6); }
+}
+
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
 }
