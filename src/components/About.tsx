@@ -68,7 +68,7 @@ const About: React.FC = () => {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden glass-card hover:shadow-glow transition-all duration-300">
                 <img
-                  src="https://res.cloudinary.com/dlkksfa9e/image/upload/v1741387661/yfhka4arlfhpkzatfb2p.jpg"
+                  src="https://res.cloudinary.com/dlkksfa9e/image/upload/f_webp/v1741387661/yfhka4arlfhpkzatfb2p.webp"
                   alt="Yejju Sathya Sai"
                   className="w-full h-full object-cover"
                 />
@@ -79,27 +79,20 @@ const About: React.FC = () => {
 
           {/* About Me Text */}
           <div className="glass-card p-8 rounded-2xl">
-            <p className="text-lg text-gray-300 mb-6 leading-relaxed fade-up hidden transition-all duration-500 transform translate-y-8">
-              I'm a passionate student specializing in  
-              <span className="highlight"> Artificial Intelligence and Machine Learning </span> 
-              at  
-              <span className="highlight"> Government Institute of Electronics, East Maredapally, Secunderabad. </span>  
-              I'm devoted to creating innovative solutions through 
-              <span className="highlight"> clean, efficient code </span>  
-              and  
-              <span className="highlight"> cutting-edge technologies. </span>
-            </p>
+            <p className="text-lg text-gray-300 mb-6 leading-relaxed fade-up hidden transition-all duration-[1500ms] transform translate-y-8">
+             I'm a passionate student specializing in 
+            <span className="text-blue-400">Artificial Intelligence and Machine Learning</span> 
+            at the 
+            <span className="text-blue-400">Government Institute of Electronics, East Maredapally, Secunderabad</span>. 
+            I'm devoted to creating innovative solutions through clean, efficient code and cutting-edge technologies.
+          </p>
 
-            <p className="text-lg text-gray-300 mb-10 leading-relaxed fade-up hidden transition-all duration-500 transform translate-y-8">
-              My journey in tech is driven by continuous and  
-              <span className="highlight"> problem-solving. </span>  
-              I enjoy tackling  
-              <span className="highlight"> complex challenges </span>  
-              and finding elegant solutions that enhance user experiences while maintaining  
-              <span className="highlight"> code quality </span>  
-              and  
-              <span className="highlight"> performance. </span>
-            </p>
+          <p className="text-lg text-gray-300 mb-10 leading-relaxed fade-up hidden transition-all duration-[1500ms] transform translate-y-8">
+            My journey in tech is driven by continuous learning and problem-solving. 
+            I enjoy tackling complex challenges and finding elegant solutions that enhance user experiences 
+            while maintaining 
+            <span className="text-blue-400">code quality</span> and <span className="text-blue-400">performance</span>.
+          </p>
 
             {/* Skills Section */}
             <div className="fade-up hidden transition-all duration-500 transform translate-y-8">
