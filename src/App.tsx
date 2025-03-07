@@ -8,9 +8,6 @@ import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-// Add framer-motion for page transitions
-<lov-add-dependency>framer-motion@latest</lov-add-dependency>
-
 const queryClient = new QueryClient();
 
 const AnimatedRoutes = () => {
