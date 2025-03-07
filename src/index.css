@@ -44,11 +44,35 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 80px;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+  
+  /* Improve focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
+  }
+  
+  /* Hide scrollbar but allow scrolling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
   }
 }
 
@@ -94,4 +118,30 @@
   .fade-up.hidden {
     @apply translate-y-8 opacity-0;
   }
+  
+  /* Improved image loading */
+  .img-loading {
+    @apply relative overflow-hidden bg-secondary animate-pulse;
+  }
+  
+  /* Accessible button focus state */
+  .btn-focus {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+  
+  /* Responsive container */
+  .responsive-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Visible class for intersection observer animations */
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+section {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 }

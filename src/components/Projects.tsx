@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GitHubRepo } from "@/lib/types";
 import { getGitHubRepos, getLanguageColor } from "@/services/github";
-import { ExternalLink, Github, Star, GitFork } from "lucide-react";
+import { ExternalLink, Github, Star, GitFork, Code } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Projects: React.FC = () => {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
@@ -30,6 +31,7 @@ const Projects: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
             const fadeElements = entry.target.querySelectorAll('.fade-up');
             fadeElements.forEach((el, index) => {
               setTimeout(() => {
@@ -62,7 +64,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" ref={sectionRef} className="py-24 bg-gradient-to-b from-secondary/10 to-background">
       <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
+        <div className="mb-16 fade-up hidden transition-all duration-500 transform translate-y-8">
           <h2 className="text-3xl font-bold tracking-tight text-center">Projects</h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-center">
             A collection of my recent work, automatically updated from my GitHub repositories.
@@ -70,27 +72,38 @@ const Projects: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
               <div 
                 key={i} 
                 className="bg-secondary/50 rounded-lg p-6 h-64 animate-pulse"
-              ></div>
+              >
+                <div className="h-6 bg-gray-700 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-700 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-700 rounded w-5/6 mb-6"></div>
+                <div className="h-3 bg-gray-700 rounded w-1/4 mb-1"></div>
+                <div className="h-3 bg-gray-700 rounded w-1/2"></div>
+              </div>
             ))}
           </div>
         ) : repos.length === 0 ? (
-          <div className="text-center py-20 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
+          <div className="text-center py-20 fade-up hidden transition-all duration-500 transform translate-y-8">
+            <Code size={48} className="mx-auto text-gray-500 mb-4" />
             <p className="text-gray-400">No repositories found. Check back later!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {repos.map((repo, index) => (
               <div 
                 key={repo.id}
-                className="bg-secondary/50 rounded-lg overflow-hidden glass border border-white/5 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 fade-up opacity-0 transition-all duration-500 transform translate-y-8"
+                className={cn(
+                  "bg-secondary/50 rounded-lg overflow-hidden glass border border-white/5 hover:border-primary/20",
+                  "transition-all duration-300 hover:-translate-y-1 fade-up hidden",
+                  "h-full flex flex-col"
+                )}
                 style={{ transitionDelay: `${index * 50}ms` }}
               >
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="font-medium text-lg truncate">{repo.name}</h3>
                     <div className="flex space-x-2">
@@ -117,7 +130,7 @@ const Projects: React.FC = () => {
                     </div>
                   </div>
                   
-                  <p className="text-gray-400 text-sm mb-4 line-clamp-2 h-10">
+                  <p className="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow">
                     {repo.description || "No description provided."}
                   </p>
                   
@@ -148,7 +161,7 @@ const Projects: React.FC = () => {
           </div>
         )}
         
-        <div className="text-center mt-12 fade-up opacity-0 transition-all duration-500 transform translate-y-8">
+        <div className="text-center mt-12 fade-up hidden transition-all duration-500 transform translate-y-8">
           <a 
             href="https://github.com/ysathyasai" 
             target="_blank" 

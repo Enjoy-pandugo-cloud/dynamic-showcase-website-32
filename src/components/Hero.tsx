@@ -53,9 +53,12 @@ const Hero: React.FC = () => {
           Yejju Sathya Sai
         </h1>
         <div className="h-px w-24 bg-primary mx-auto my-8 opacity-0 animate-on-scroll"></div>
-        <h3 className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-2xl mx-auto opacity-0 animate-on-scroll mb-12">
-          Building digital experiences with clean, efficient code
+        <h3 className="text-xl sm:text-2xl md:text-3xl text-gray-300 max-w-2xl mx-auto opacity-0 animate-on-scroll mb-4">
+          Student at Government Institute of Electronics
         </h3>
+        <p className="text-lg text-gray-400 max-w-2xl mx-auto opacity-0 animate-on-scroll mb-12">
+          Specializing in Artificial Intelligence and Machine Learning
+        </p>
         
         <a
           href="#about"
