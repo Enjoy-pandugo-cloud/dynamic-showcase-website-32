@@ -5,35 +5,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3.9%;
+    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --card: 240 6% 10%;
+    --card: 240 10% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 3.9%;
+    --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 210 100% 40%;
+    --primary: 222 89% 55%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 6% 15%;
+    --secondary: 240 10% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 240 4% 16%;
+    --muted: 240 10% 16%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 240 4% 16%;
+    --accent: 263 81% 58%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
+    --border: 240 10% 16%;
+    --input: 240 10% 16%;
     --ring: 240 5% 64.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   * {
@@ -78,7 +78,24 @@
 
 @layer components {
   .glass {
-    @apply backdrop-blur-lg bg-white/5 border border-white/10;
+    @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)];
+  }
+  
+  .gradient-border {
+    @apply relative before:absolute before:-inset-1 before:rounded-lg before:p-1
+    before:bg-gradient-to-r before:from-primary before:via-accent before:to-primary/50 before:-z-10;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary-foreground to-blue-300;
+  }
+  
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-blue-400;
   }
   
   .section-container {
@@ -86,16 +103,20 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-semibold mb-8 relative inline-block;
+    @apply text-3xl md:text-4xl font-semibold mb-8 relative inline-block text-gradient;
   }
   
   .section-title::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-1/2 h-[2px] bg-primary rounded-full;
+    @apply absolute bottom-0 left-0 w-1/2 h-[2px] bg-gradient-to-r from-primary via-accent to-primary/50 rounded-full;
   }
   
   .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-glow;
+  }
+  
+  .shadow-glow {
+    @apply shadow-[0_0_15px_rgba(88,85,251,0.3)];
   }
   
   .text-balance {
@@ -129,9 +150,31 @@
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
   
+  /* Gradient Buttons */
+  .btn-gradient {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300
+    bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary
+    shadow-md hover:shadow-glow;
+  }
+  
   /* Responsive container */
   .responsive-container {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Background video container */
+  .video-background {
+    @apply fixed top-0 left-0 h-full w-full object-cover z-[-1];
+  }
+  
+  /* Video overlay for better text contrast */
+  .video-overlay {
+    @apply fixed top-0 left-0 h-full w-full bg-black/70 z-[-1];
+  }
+  
+  /* Animated gradient backgrounds */
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary/20 via-accent/10 to-background bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500;
   }
 }
 
@@ -143,5 +186,43 @@
 
 section {
   opacity: 1;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+/* Background size utilities for gradient animations */
+.bg-size-200 {
+  background-size: 200% 200%;
+}
+
+.bg-pos-0 {
+  background-position: 0% 0%;
+}
+
+.bg-pos-100 {
+  background-position: 100% 100%;
+}
+
+/* Floating animation for UI elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glow effect for highlighted elements */
+.glow {
+  box-shadow: 0 0 15px rgba(88, 85, 251, 0.5);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(88, 85, 251, 0.5);
 }

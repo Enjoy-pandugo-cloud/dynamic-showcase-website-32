@@ -52,16 +52,21 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 bg-gradient-to-b from-background to-secondary/10">
-      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 fade-up hidden transition-all duration-500 transform translate-y-8">
-          <h2 className="text-3xl font-bold tracking-tight text-center">About Me</h2>
+    <section id="about" ref={sectionRef} className="py-24 relative">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-20 -left-20 w-80 h-80 bg-accent/10 rounded-full filter blur-3xl"></div>
+      </div>
+      
+      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mb-16 text-center fade-up hidden transition-all duration-500 transform translate-y-8">
+          <h2 className="text-3xl font-bold tracking-tight text-gradient">About Me</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="fade-up hidden transition-all duration-500 transform translate-y-8">
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden glass">
+              <div className="aspect-square rounded-2xl overflow-hidden glass-card hover:shadow-glow transition-all duration-300">
                 <img 
                   src="https://github.com/user-attachments/assets/4b3aec50-e518-4ed8-895c-0fc3ea5c3083" 
                   alt="Yejju Sathya Sai" 
@@ -69,11 +74,11 @@ const About: React.FC = () => {
                   loading="lazy"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-primary rounded-lg"></div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-accent rounded-lg"></div>
             </div>
           </div>
           
-          <div>
+          <div className="glass-card p-8 rounded-2xl">
             <p className="text-lg text-gray-300 mb-6 leading-relaxed fade-up hidden transition-all duration-500 transform translate-y-8">
               I'm a passionate student specializing in Artificial Intelligence and Machine Learning 
               at the Government Institute of Electronics, East Maredapally, Secunderabad. I'm devoted to 
@@ -87,12 +92,12 @@ const About: React.FC = () => {
             </p>
             
             <div className="fade-up hidden transition-all duration-500 transform translate-y-8">
-              <h3 className="text-xl font-medium mb-4">Skills</h3>
+              <h3 className="text-xl font-medium mb-4 text-gradient-primary">Skills</h3>
               <div className="flex flex-wrap gap-3">
                 {skills.map((skill) => (
                   <span 
                     key={skill} 
-                    className="px-4 py-2 bg-muted rounded-full text-sm text-gray-200 hover:bg-primary/20 transition-colors duration-300"
+                    className="px-4 py-2 glass rounded-full text-sm text-gray-200 hover:shadow-glow transition-all duration-300 hover:bg-primary/20"
                   >
                     {skill}
                   </span>

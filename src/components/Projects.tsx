@@ -62,10 +62,15 @@ const Projects: React.FC = () => {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-24 bg-gradient-to-b from-secondary/10 to-background">
-      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 fade-up hidden transition-all duration-500 transform translate-y-8">
-          <h2 className="text-3xl font-bold tracking-tight text-center">Projects</h2>
+    <section id="projects" ref={sectionRef} className="py-24 relative">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-40 -left-40 w-96 h-96 bg-accent/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute -bottom-20 right-20 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl"></div>
+      </div>
+      
+      <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mb-16 text-center fade-up hidden transition-all duration-500 transform translate-y-8">
+          <h2 className="text-3xl font-bold tracking-tight text-gradient">Projects</h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-center">
             A collection of my recent work, automatically updated from my GitHub repositories.
           </p>
@@ -76,7 +81,7 @@ const Projects: React.FC = () => {
             {[...Array(6)].map((_, i) => (
               <div 
                 key={i} 
-                className="bg-secondary/50 rounded-lg p-6 h-64 animate-pulse"
+                className="glass-card rounded-lg p-6 h-64 animate-pulse"
               >
                 <div className="h-6 bg-gray-700 rounded w-3/4 mb-4"></div>
                 <div className="h-4 bg-gray-700 rounded w-full mb-2"></div>
@@ -97,7 +102,7 @@ const Projects: React.FC = () => {
               <div 
                 key={repo.id}
                 className={cn(
-                  "bg-secondary/50 rounded-lg overflow-hidden glass border border-white/5 hover:border-primary/20",
+                  "glass-card rounded-lg overflow-hidden hover:shadow-glow",
                   "transition-all duration-300 hover:-translate-y-1 fade-up hidden",
                   "h-full flex flex-col"
                 )}
@@ -105,13 +110,13 @@ const Projects: React.FC = () => {
               >
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="font-medium text-lg truncate">{repo.name}</h3>
+                    <h3 className="font-medium text-lg truncate text-gradient-primary">{repo.name}</h3>
                     <div className="flex space-x-2">
                       <a 
                         href={repo.html_url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-white transition-colors"
+                        className="text-gray-400 hover:text-primary transition-colors"
                         aria-label={`View ${repo.name} on GitHub`}
                       >
                         <Github size={18} />
@@ -121,7 +126,7 @@ const Projects: React.FC = () => {
                           href={repo.homepage} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-white transition-colors"
+                          className="text-gray-400 hover:text-primary transition-colors"
                           aria-label={`Visit live demo for ${repo.name}`}
                         >
                           <ExternalLink size={18} />
@@ -166,7 +171,7 @@ const Projects: React.FC = () => {
             href="https://github.com/ysathyasai" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-lg transition-colors duration-300"
+            className="btn-gradient inline-flex items-center space-x-2"
           >
             <Github size={18} />
             <span>View All Projects</span>
