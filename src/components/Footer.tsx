@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
                 <Github size={18} className="hover:shadow-glow" />
               </a>
               <a 
-                href="https://www.linkedin.com/in/ysathyasai" 
+                href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
