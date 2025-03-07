@@ -72,7 +72,7 @@ const Projects: React.FC = () => {
         <div className="mb-16 text-center fade-up hidden transition-all duration-500 transform translate-y-8">
           <h2 className="text-3xl font-bold tracking-tight text-gradient">Projects</h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-center">
-            A collection of my recent work, automatically updated from my GitHub repositories.
+            A collection of my recent work, from my GitHub repositories.
           </p>
         </div>
 
