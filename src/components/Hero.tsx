@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
               boxShadow: `0 0 ${10 + (glowIntensity / 10)}px rgba(88,85,251,${0.3 + (glowIntensity / 300)})`
             }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold p-4 tracking-tight opacity-0 animate-on-scroll text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold p-4 tracking-tight opacity-0 animate-on-scroll text-gradient bg-black rounded-lg">
               {typedText}<span className="animate-pulse">|</span>
             </h1>
           </div>
