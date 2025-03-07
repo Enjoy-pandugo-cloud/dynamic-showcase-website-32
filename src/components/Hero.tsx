@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
         className="fixed top-0 left-0 w-full h-full object-cover z-[-1] transform-gpu"
       >
         <source 
-          src="https://github.com/user-attachments/assets/e270eaa6-584b-4976-94b5-9eb15651b7bc" 
+          src="https://res.cloudinary.com/dlkksfa9e/video/upload/v1741388922/nwunqyg7pk9qdsltfbu0.mp4" 
           type="video/mp4" 
         />
       </video>
