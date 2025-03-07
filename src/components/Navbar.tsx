@@ -148,7 +148,7 @@ const Navbar: React.FC = () => {
               <Github size={24} />
             </a>
             <a 
-              href="https://linkedin.com/in/ysathyasai" 
+              href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
