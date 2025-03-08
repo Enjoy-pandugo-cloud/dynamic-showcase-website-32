@@ -157,40 +157,8 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Connect Section */}
-          <div className="flex flex-col">
-            <div className={`transition-all duration-700 transform ${envelopeOpen ? 'scale-110' : 'scale-100'}`}>
-              <div className="relative">
-                <Mail
-                  className={`w-24 h-24 text-primary transition-all duration-700 transform ${envelopeOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`}
-                />
-                <MessageCircle
-                  className={`w-24 h-24 text-primary absolute top-0 left-0 transition-all duration-700 transform ${envelopeOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
-                />
-              </div>
-              <p className="text-xl mt-6 text-center text-gradient-primary">
-                {envelopeOpen ? "Let's Connect!" : "Send me an email"}
-              </p>
-              <div className="mt-4 text-center">
-                <a
-                  href="mailto:ysathyasai.dev@gmail.com"
-                  className="inline-flex items-center text-center px-5 py-2 glass border border-primary/30 rounded-full hover:border-primary transition-all duration-300 hover:shadow-glow group"
-                >
-                  <Mail className="w-4 h-4 mr-2 text-primary group-hover:animate-pulse" />
-                  <span className="text-sm">ysathyasai.dev@gmail.com</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-accent/5"></div>
-              <div className="absolute top-10 right-10 w-20 h-20 bg-primary/10 rounded-full filter blur-2xl animate-pulse-slow"></div>
-              <div className="absolute bottom-10 left-10 w-16 h-16 bg-accent/10 rounded-full filter blur-2xl animate-pulse-slow" style={{ animationDelay: "1s" }}></div>
-            </div>
-          </div>
-
           {/* Contact Form Section */}
-          <div className="glass-card rounded-2xl p-8 fade-up hidden transition-all duration-500 transform translate-y-8 flex-1">
+          <div className="glass-card rounded-2xl p-8 fade-up hidden transition-all duration-500 transform translate-y-8 hover:shadow-glow transition-all duration-300">
             <div className="mb-6">
               <h3 className="text-xl font-medium mb-4 text-gradient-primary">Send Me a Message</h3>
               <p className="text-gray-300 mb-6">
@@ -265,49 +233,83 @@ const Contact: React.FC = () => {
             </form>
           </div>
 
-          <div className="glass-card rounded-2xl p-8 fade-up hidden transition-all duration-500 transform translate-y-8 flex-1">
-            <h3 className="text-xl font-medium mb-6 text-gradient-primary">Connect With Me</h3>
+          {/* Connect Section */}
+          <div className="flex flex-col">
+            <div className="glass-card rounded-2xl p-8 fade-up hidden transition-all duration-500 transform translate-y-8 mb-6 h-[320px] flex items-center justify-center relative overflow-hidden">
+              <div className={`transition-all duration-700 transform ${envelopeOpen ? 'scale-110' : 'scale-100'}`}>
+                <div className="relative">
+                  <Mail 
+                    className={`w-24 h-24 text-primary transition-all duration-700 transform ${envelopeOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`} 
+                  />
+                  <MessageCircle 
+                    className={`w-24 h-24 text-primary absolute top-0 left-0 transition-all duration-700 transform ${envelopeOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} 
+                  />
+                </div>
+                <p className="text-xl mt-6 text-center text-gradient-primary">
+                  {envelopeOpen ? "Let's Connect!" : "Send me an email"}
+                </p>
+                <div className="mt-4 text-center">
+                  <a
+                    href="mailto:ysathyasai.dev@gmail.com"
+                    className="inline-flex items-center text-center px-5 py-2 glass border border-primary/30 rounded-full hover:border-primary transition-all duration-300 hover:shadow-glow group"
+                  >
+                    <Mail className="w-4 h-4 mr-2 text-primary group-hover:animate-pulse" />
+                    <span className="text-sm">ysathyasai.dev@gmail.com</span>
+                  </a>
+                </div>
+              </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <a
-                href="https://github.com/ysathyasai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
-              >
-                <Github className="w-6 h-6 text-primary" />
-                <span className="text-sm">GitHub</span>
-              </a>
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-accent/5"></div>
+                <div className="absolute top-10 right-10 w-20 h-20 bg-primary/10 rounded-full filter blur-2xl animate-pulse-slow"></div>
+                <div className="absolute bottom-10 left-10 w-16 h-16 bg-accent/10 rounded-full filter blur-2xl animate-pulse-slow" style={{ animationDelay: "1s" }}></div>
+              </div>
+            </div>
 
-              <a
-                href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
-              >
-                <Linkedin className="w-6 h-6 text-primary" />
-                <span className="text-sm">LinkedIn</span>
-              </a>
+            <div className="glass-card rounded-2xl p-8 fade-up hidden transition-all duration-500 transform translate-y-8 flex-1">
+              <h3 className="text-xl font-medium mb-6 text-gradient-primary">Connect With Me</h3>
 
-              <a
-                href="https://x.com/ysathyasai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
-              >
-                <Twitter className="w-6 h-6 text-primary" />
-                <span className="text-sm">Twitter/X</span>
-              </a>
+              <div className="grid grid-cols-2 gap-4">
+                <a 
+                  href="https://github.com/ysathyasai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                >
+                  <Github className="w-6 h-6 text-primary" />
+                  <span className="text-sm">GitHub</span>
+                </a>
 
-              <a
-                href="https://medium.com/@ysathyasai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
-              >
-                <FileText className="w-6 h-6 text-primary" />
-                <span className="text-sm">Medium</span>
-              </a>
+                <a 
+                  href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                >
+                  <Linkedin className="w-6 h-6 text-primary" />
+                  <span className="text-sm">LinkedIn</span>
+                </a>
+
+                <a 
+                  href="https://x.com/ysathyasai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                >
+                  <Twitter className="w-6 h-6 text-primary" />
+                  <span className="text-sm">Twitter/X</span>
+                </a>
+
+                <a 
+                  href="https://medium.com/@ysathyasai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                >
+                  <FileText className="w-6 h-6 text-primary" />
+                  <span className="text-sm">Medium</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
