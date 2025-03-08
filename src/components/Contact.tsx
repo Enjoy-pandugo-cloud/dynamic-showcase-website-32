@@ -228,8 +228,7 @@ const Contact: React.FC = () => {
           
           {/* Connect Section */}
           <div className="flex flex-col">
-            <div className="glass-card rounded-2xl p-8 fade-up hidden transition-all duration-500 transform translate-y-8 mb-6 h-[320px] flex items-center justify-center relative overflow-hidden">
-              <div className={`transition-all duration-700 transform ${envelopeOpen ? 'scale-110' : 'scale-100'}`}>
+            <div className={`transition-all duration-700 transform ${envelopeOpen ? 'scale-110' : 'scale-100'}`}>
                 <div className="relative">
                   <Mail 
                     className={`w-24 h-24 text-primary transition-all duration-700 transform ${envelopeOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`} 
@@ -251,6 +250,16 @@ const Contact: React.FC = () => {
                   </a>
                 </div>
               </div>
+
+              <script>
+                {useEffect(() => {
+                  const interval = setInterval(() => {
+                    setEnvelopeOpen((prev) => !prev);
+                  }, 5000); // Toggle every 5 seconds
+
+                  return () => clearInterval(interval);
+                }, [])}
+              </script>
               
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-accent/5"></div>
