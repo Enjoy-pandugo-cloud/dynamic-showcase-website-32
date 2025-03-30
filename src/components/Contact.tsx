@@ -281,7 +281,7 @@ const Contact: React.FC = () => {
                 </a>
 
                 <a 
-                  href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293" 
+                  href="https://www.linkedin.com/in/ysathyasai" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex flex-col items-center gap-3 p-4 glass rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 hover:shadow-glow"
