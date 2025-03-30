@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
                 <Github size={20} />
               </a>
               <a 
-                href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293" 
+                href="https://www.linkedin.com/in/ysathyasai" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -148,7 +148,7 @@ const Navbar: React.FC = () => {
               <Github size={24} />
             </a>
             <a 
-              href="https://www.linkedin.com/in/yejju-sathya-sai-4a76a9293" 
+              href="https://www.linkedin.com/in/ysathyasai" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
