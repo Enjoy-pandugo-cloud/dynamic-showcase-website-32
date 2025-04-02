@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🙂 dynamic-showcase-website 🙂</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta property="og:image" content="/og-image.png" />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🙂 ysathyasai-portfolio 🙂</title>
+    <meta name="description" content="Lovable Generated Project">
+    <meta property="og:image" content="/og-image.png">
+</head>
 
-  <body>
+<body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
 
     <script>
-      let myEmojis = [
-        "🙂", "😊", "😃", "😆", "😁",  // Happy phase
-        "😐", // Neutral transition
-        "😕", "🙁", "🫤", "😢", "🥹", // Sad phase
-        "😏", "😯", "😮", "😐", "🙂"  // Back to Neutral & Happy
-      ];
+        let myEmojis = ["🙂", "😊", "😃", "😆", "😁", "😐", "😕", "🙁", "🫤", "😢", "🥹", "😏", "😯", "😮", "😐", "🙂"];
+        let index = 0;
 
-      let index = 0;
+        function urlAnimate() {
+            let emoji = myEmojis[index];
+            window.location.hash = emoji;
+            document.title = `${emoji} ysathyasai-portfolio ${emoji}`;
+            index = (index + 1) % myEmojis.length;
+            setTimeout(urlAnimate, 900);
+        }
 
-      let urlAnimate = () => {
-        let emoji = myEmojis[index];
-        window.location.hash = emoji;
-        document.title = `${emoji} dynamic-showcase-website ${emoji}`; // Proper title update
-
-        index = (index + 1) % myEmojis.length; // Loop through emojis smoothly
-
-        setTimeout(urlAnimate, 900); // Smooth transition
-      };
-
-      urlAnimate();
+        urlAnimate();
     </script>
-  </body>
+</body>
 </html>
